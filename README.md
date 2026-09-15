@@ -2,7 +2,7 @@
 
 A hands-on cybersecurity home lab documenting my progression from core networking and system administration to vulnerability assessment, incident response, and security automation.
 
-> **Status:** In progress — repository structure created and Phase 1 planned.
+> **Status:** In progress — Windows Server 2022 domain controller deployed with Active Directory Domain Services and DNS.
 
 ## Project goals
 
@@ -15,29 +15,74 @@ A hands-on cybersecurity home lab documenting my progression from core networkin
 - Develop small Python tools that automate repeatable security tasks.
 - Present clear evidence, findings, and remediation recommendations for each phase.
 
-## Planned lab environment
+## Lab environment
 
-| Component | Purpose |
+| Component | Purpose | Status |
+|---|---|---|
+| Oracle VirtualBox | Run the isolated virtual machines | Configured |
+| Windows Server 2022 | Domain controller and core Windows infrastructure | Deployed |
+| Active Directory Domain Services | Centralised identity and domain management | Deployed |
+| DNS Server | Active Directory-integrated name resolution | Deployed |
+| Windows 10/11 | Domain-joined client | Next step |
+| Linux | Administration and security tooling | Planned |
+| Cisco Packet Tracer | Routing, switching and VLAN practice | Planned |
+| Wireshark | Packet capture and protocol analysis | Planned |
+| Nmap | Authorised network discovery and assessment | Planned |
+| Python | Security automation | Planned |
+
+## Current lab configuration
+
+| Setting | Value |
 |---|---|
-| VirtualBox or VMware | Run the isolated virtual machines |
-| Windows Server 2022 | Domain controller, AD DS, DNS and DHCP |
-| Windows 10/11 | Domain-joined client |
-| Linux | Administration and security tooling |
-| Cisco Packet Tracer | Routing, switching and VLAN practice |
-| Wireshark | Packet capture and protocol analysis |
-| Nmap | Authorised network discovery and assessment |
-| Python | Security automation |
+| Domain Controller | `DC01` |
+| Operating System | Windows Server 2022 Standard Evaluation |
+| DC01 IPv4 | `192.168.10.10/24` |
+| Active Directory forest/domain | `tochilab.local` |
+| NetBIOS domain | `TOCHILAB` |
+| DNS Server | DC01 |
+| Global Catalog | Enabled |
+
+## Work completed
+
+### Windows Server and Active Directory foundation
+
+- Created a Windows Server 2022 virtual machine in Oracle VirtualBox.
+- Renamed the server to `DC01`.
+- Configured a static IPv4 address of `192.168.10.10/24` for the lab network.
+- Configured DC01 to use itself for DNS in preparation for Active Directory-integrated DNS.
+- Installed the Active Directory Domain Services (AD DS) role.
+- Installed the DNS Server role.
+- Created a new Active Directory forest named `tochilab.local`.
+- Configured the NetBIOS domain name as `TOCHILAB`.
+- Enabled DNS and Global Catalog functionality on the domain controller.
+- Completed the AD DS prerequisite checks successfully.
+- Promoted DC01 to the first domain controller in the forest.
+- Verified the domain-aware sign-in environment with `TOCHILAB\\Administrator`.
 
 ## Project roadmap
 
 | Phase | Focus | Status |
 |---|---|---|
 | 1 | Networking fundamentals and lab design | In progress |
-| 2 | Windows Server and Active Directory | Planned |
-| 3 | Network monitoring and traffic analysis | Planned |
-| 4 | Vulnerability assessment and remediation | Planned |
-| 5 | Incident response investigation | Planned |
-| 6 | Python security automation | Planned |
+| 2 | Windows Server and Active Directory | In progress |
+| 3 | Windows client deployment and domain integration | Planned |
+| 4 | Active Directory users, groups, OUs, DHCP and Group Policy | Planned |
+| 5 | Network monitoring and traffic analysis | Planned |
+| 6 | Vulnerability assessment and remediation | Planned |
+| 7 | Incident response investigation | Planned |
+| 8 | Python security automation | Planned |
+
+## Next steps
+
+1. Verify Active Directory and DNS services after promotion.
+2. Create a VirtualBox snapshot of the working DC01 state.
+3. Deploy a Windows client VM named `PC01`.
+4. Configure PC01 to use DC01 for DNS.
+5. Join PC01 to `tochilab.local`.
+6. Create organisational units, users and security groups.
+7. Configure and test Group Policy Objects (GPOs).
+8. Add DHCP and validate automatic client addressing.
+9. Expand the lab into network monitoring, vulnerability assessment and incident-response exercises.
 
 ## Repository structure
 
@@ -65,10 +110,6 @@ Each practical exercise will record:
 6. Problems encountered and troubleshooting
 7. Security findings and recommended remediation
 8. Skills demonstrated
-
-## Current work
-
-Phase 1 begins with designing an isolated network, creating an IP addressing plan, and documenting the intended lab architecture before deploying virtual machines.
 
 ## Ethics and safety
 
